@@ -1,0 +1,111 @@
+@import "vars";
+@import "mediaQueries";
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h3, h4, p {
+    text-align: center;
+    margin: 0;
+}
+
+span {
+    font-size: 0.7em;
+}
+
+p {
+    font-size: 0.6em;
+}
+
+.groupNum p {
+    border-right: 1px solid black;
+}
+
+.groupNum p:first-child {
+    border-left: 1px solid black;
+}
+
+section {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    margin: 1em 0;
+}
+
+//Elements aligned to the bottom
+.group {
+    align-self: end;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+//Lanthanide and Actinide groups aligned to the right side
+@for $i from 1 through 15 {
+    .lanAct div:nth-child(#{$i}) {
+        grid-column:  #{3 + $i} / #{4 + $i};
+    }
+}
+
+//Element groups postitioned
+@for $i from 1 through 10 {
+    .elementGroups div:nth-child(#{$i}) {
+        grid-column:  #{2 + $i} / #{3 + $i};
+    }
+}
+
+.elementGroups {
+    position: absolute;
+    div {
+        display: grid;
+        align-items: center;
+    }
+}
+
+//Table styling
+
+$list:  $alcali-metal,       // .color1
+        $alcaline-earth,     // .color2
+        $transition-metal,   // .color3
+        $basic-metal,        // .color4
+        $semimetal,          // .color5
+        $nonmetal,           // .color6
+        $halogen,            // .color7
+        $noble-gas,          // .color8
+        $lanthanide,         // .color9
+        $actinide;           // .color10
+
+//Classes color1 - color10 created, with appropriate background color
+@each $color in $list {
+    $i: index($list, $color);
+    .color#{$i} {
+        background-color: $color;
+    }
+}
+
+.lanAct div div:first-child {
+    background-color: $lanthanide;
+}
+
+.lanAct div div:last-child {
+    background-color: $actinide;
+}
+
+section div div {
+    border: 1px solid black;
+    margin: 0.05em;
+    box-shadow: inset 0 0 7px #767575;
+    &:hover {
+        transform: scale(1.3);
+        transition: 0.3s;
+    }
+}
+
+
+
+
+
+
+
